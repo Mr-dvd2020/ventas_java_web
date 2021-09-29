@@ -91,7 +91,7 @@ public class EmpleadoBD {
            ps=con.prepareStatement(sql);
            rs=ps.executeQuery();
            while(rs.next()){
-               em.setId(rs.getInt(1));
+               //em.setId(rs.getInt(1));
                em.setDni(rs.getString(2));
                em.setNomb(rs.getString(3));
                em.setTelf(rs.getString(4));
@@ -103,7 +103,7 @@ public class EmpleadoBD {
        return em;
    }
    public int actualizar(Empleado em){
-       String sql="update empleado set Dni=?,Nombres=?,Telefono=?,Estado=?,User=? where=IdEmpleado=?";
+       String sql="UPDATE empleado SET Dni=?,Nombres=?,Telefono=?,Estado=?,User=? Where IdEmpleado=?";
        try{
            con=cn.Conexion();
            ps=con.prepareStatement(sql);
@@ -120,7 +120,7 @@ public class EmpleadoBD {
        return r;
    }
    public void Eliminar(int id){
-       String sql="delete from empleado where=IdEmpleado="+id;
+       String sql="delete from empleado where IdEmpleado="+id;
        try{
            con=cn.Conexion();
            ps=con.prepareStatement(sql);

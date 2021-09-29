@@ -70,7 +70,7 @@ public class ProductoBD {
            ps=con.prepareStatement(sql);
            rs=ps.executeQuery();
            while(rs.next()){
-               pr.setId(rs.getInt(1));
+               //pr.setId(rs.getInt(1));
                pr.setNomb(rs.getString(2));
                pr.setPrecio(rs.getDouble(3));
                pr.setStok(rs.getInt(4));
@@ -81,7 +81,7 @@ public class ProductoBD {
        return pr;
    }
    public int actualizar(Producto pr){
-       String sql="update producto set Nombres=?,Precio=?,Stock=?,Estado=?, where=IdProducto=?";
+       String sql="UPDATE producto SET Nombres=?,Precio=?,Stock=?,Estado=? Where IdProducto=?";
        try{
            con=cn.Conexion();
            ps=con.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class ProductoBD {
        return r;
    }
    public void Eliminar(int id){
-       String sql="delete from producto where=IdProducto="+id;
+       String sql="delete from producto where IdProducto="+id;
        try{
            con=cn.Conexion();
            ps=con.prepareStatement(sql);
