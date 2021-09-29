@@ -49,7 +49,7 @@ public class ClienteBD {
        return lista;
    } 
    public int agregar(Cliente cl){
-       String sql="insert into cliente(Dni,Nombres,Telefono,Estado)values(?,?,?,?)";
+       String sql="insert into cliente(Dni,Nombres,Direccion,Estado)values(?,?,?,?)";
        try{
            con=cn.Conexion();
            ps=con.prepareStatement(sql);
@@ -71,7 +71,7 @@ public class ClienteBD {
            ps=con.prepareStatement(sql);
            rs=ps.executeQuery();
            while(rs.next()){
-               cl.setId(rs.getInt(1));
+               //cl.setId(rs.getInt(1));
                cl.setDni(rs.getString(2));
                cl.setNomb(rs.getString(3));
                cl.setDirecc(rs.getString(4));
@@ -82,7 +82,7 @@ public class ClienteBD {
        return cl;
    }
    public int actualizar(Cliente cl){
-       String sql="update cliente set Dni=?,Nombres=?,Telefono=?,Estado=?,User=? where=IdCliente=?";
+       String sql="UPDATE cliente SET Dni=?,Nombres=?,Direccion=?,Estado=? Where IdCliente=?";
        try{
            con=cn.Conexion();
            ps=con.prepareStatement(sql);
@@ -98,7 +98,7 @@ public class ClienteBD {
        return r;
    }
    public void Eliminar(int id){
-       String sql="delete from cliente where=IdCliente="+id;
+       String sql="delete from cliente where IdCliente="+id;
        try{
            con=cn.Conexion();
            ps=con.prepareStatement(sql);

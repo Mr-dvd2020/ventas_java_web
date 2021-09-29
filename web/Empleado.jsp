@@ -7,7 +7,7 @@
 <%@page import="com.mysql.jdbc.Driver"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="conig.Conexion"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,12 +16,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
+        <%--
             Conexion cn=new Conexion();
             Connection con;
             PreparedStatement ps;
             ResultSet rs;
-        %>
+        --%>
         <div class="d-flex">
             <div class="card col-sm-4">
                 <div class="card-body">
@@ -67,7 +67,7 @@
                     </thead>
                     <tbody>
                         
-                            <%
+                            <%--
                                 try {
                                     String sql="select * from empleado";           
                                     con=cn.Conexion();
@@ -94,9 +94,9 @@
                                     out.print("error mysql "+e);
                                 }
 
-                            %>
+                            --%>
                         
-                        <%-- 
+                        
                         <c:forEach var="em" items="${empleados}">
                             <tr>
                                 <td>${em.getId()}</td>
@@ -106,15 +106,14 @@
                                 <td>${em.getEstad()}</td>
                                 <td>${em.getUser()}</td>
                                 <td>
-                                    <a>Editar</a>
-                                    <a>Eliminar</a>
+                                    <a class="btn btn-outline-light" style="background-color: chartreuse;" href="Controlador?menu=Empleado&accion=Editar&id=${em.getId()}">Editar</a>
+                                    <a class="btn btn-danger" href="Controlador?menu=Empleado&accion=Eliminar&id=${em.getId()}">Eliminar</a>
                                 </td>
                                 
                             </tr>
                         </c:forEach>
-                        --%>
                         
-                    
+                                       
                         
                     </tbody>
                 </table>

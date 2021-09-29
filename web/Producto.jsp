@@ -1,12 +1,13 @@
  <%-- 
     Document   : Producto
     Created on : 29-abr-2021, 14:31:58
-    Author     : usuario
+    Author     : DAVID SONCCO CACHURA
 --%>
 <%@page import="java.sql.*"%>
 <%@page import="com.mysql.jdbc.Driver"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="conig.Conexion"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,12 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
-            Conexion cn=new Conexion();
-            Connection con;
-            PreparedStatement ps;
-            ResultSet rs;
-        %>
+
         <div class="d-flex">
             <div class="card col-sm-4">
                 <div class="card-body">
@@ -61,54 +57,22 @@
                     </thead>
                     <tbody>
                         
-                            <%
-                                try {
-                                    String sql="select * from producto";           
-                                    con=cn.Conexion();
-                                    ps=con.prepareStatement(sql);
-                                    rs = ps.executeQuery();
-                                    while (rs.next()) {
-                            %>
+                        <c:forEach var="pd" items="${productos}">
                             <tr>
-                                <th><%= rs.getString(1)%></th>
-                                <td><%= rs.getString(2)%></td>
-                                <td><%= rs.getString(3)%></td>
-                                <td><%= rs.getString(4)%></td>
-                                <td><%= rs.getString(5)%></td>
+                                <td>${pd.getId()}</td>
+                                <td>${pd.getNomb()}</td>
+                                <td>${pd.getPrecio()}</td>
+                                <td>${pd.getStok()}</td>
+                                <td>${pd.getEstad()}</td>
                                 <td>
-                                    <a class="btn btn-outline-light" style="background-color: chartreuse;" href="Controlador?menu=Producto&accion=Editar&id=<%= rs.getString(1)%>">Editar</a>
-                                    <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Eliminar&id=<%= rs.getString(1)%>">Eliminar</a>
-                                </td>
-                            </tr>                                    
-                            <%
-                                    }
-                                } 
-                                catch (Exception e) {
-                                    out.print("error mysql "+e);
-                                }
-
-                            %>
-                        
-                        <%-- 
-                        <c:forEach var="em" items="${empleados}">
-                            <tr>
-                                <td>${em.getId()}</td>
-                                <td>${em.getDni()}</td>
-                                <td>${em.getNomb()}</td>
-                                <td>${em.getTelf()}</td>
-                                <td>${em.getEstad()}</td>
-                                <td>${em.getUser()}</td>
-                                <td>
-                                    <a>Editar</a>
-                                    <a>Eliminar</a>
+                                    <a class="btn btn-outline-light" style="background-color: chartreuse;" href="Controlador?menu=Producto&accion=Editar&id=${pd.getId()}">Editar</a>
+                                    <a class="btn btn-danger" href="Controlador?menu=Producto&accion=Eliminar&id=${pd.getId()}">Eliminar</a>
                                 </td>
                                 
                             </tr>
                         </c:forEach>
-                        --%>
-                        
-                    
-                        
+ 
+
                     </tbody>
                 </table>
             </div>

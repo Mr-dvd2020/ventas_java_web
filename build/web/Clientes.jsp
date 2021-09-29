@@ -7,6 +7,7 @@
 <%@page import="com.mysql.jdbc.Driver"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="conig.Conexion"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,12 +16,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
-            Conexion cn=new Conexion();
-            Connection con;
-            PreparedStatement ps;
-            ResultSet rs;
-        %>
         <%-- contenedor --%>
         <div class="d-flex">
             <div class="card col-sm-4">
@@ -61,52 +56,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
-                            <%
-                                try {
-                                    String sql="select * from cliente";           
-                                    con=cn.Conexion();
-                                    ps=con.prepareStatement(sql);
-                                    rs = ps.executeQuery();
-                                    while (rs.next()) {
-                            %>
-                            <tr>
-                                <th><%= rs.getString(1)%></th>
-                                <td><%= rs.getString(2)%></td>
-                                <td><%= rs.getString(3)%></td>
-                                <td><%= rs.getString(4)%></td>
-                                <td><%= rs.getString(5)%></td>
-                                <td>
-                                    <a class="btn btn-outline-light" style="background-color: chartreuse;" href="Controlador?menu=Cliente&accion=Editar&id=<%= rs.getString(1)%>">Editar</a>
-                                    <a class="btn btn-danger" href="Controlador?menu=Cliente&accion=Eliminar&id=<%= rs.getString(1)%>">Eliminar</a>
-                                </td>
-                            </tr>                                    
-                            <%
-                                    }
-                                } 
-                                catch (Exception e) {
-                                    out.print("error mysql "+e);
-                                }
 
-                            %>
-                        
-                        <%-- 
-                        <c:forEach var="em" items="${empleados}">
+                        <c:forEach var="cl" items="${clientes}">
                             <tr>
-                                <td>${em.getId()}</td>
-                                <td>${em.getDni()}</td>
-                                <td>${em.getNomb()}</td>
-                                <td>${em.getTelf()}</td>
-                                <td>${em.getEstad()}</td>
-                                <td>${em.getUser()}</td>
+                                <td>${cl.getId()}</td>
+                                <td>${cl.getDni()}</td>
+                                <td>${cl.getNomb()}</td>
+                                <td>${cl.getDirecc()}</td>
+                                <td>${cl.getEstad()}</td>
+                               
                                 <td>
-                                    <a>Editar</a>
-                                    <a>Eliminar</a>
+                                    <a class="btn btn-outline-light" style="background-color: chartreuse;" href="Controlador?menu=Cliente&accion=Editar&id=${cl.getId()}">Editar</a>
+                                    <a class="btn btn-danger" href="Controlador?menu=Cliente&accion=Eliminar&id=${cl.getId()}">Eliminar</a>
                                 </td>
                                 
                             </tr>
                         </c:forEach>
-                        --%>
+          
                         
                     
                         
